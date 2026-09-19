@@ -1,0 +1,186 @@
+studyshare/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── db.js
+│   │   │   └── env.js
+│   │   │
+│   │   ├── models/
+│   │   │   ├── User.js
+│   │   │   ├── Note.js                # CHANGED: + downloads count, + thumbnailUrl
+│   │   │   └── Comment.js
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── auth.controller.js
+│   │   │   ├── note.controller.js     # CHANGED: + q (search), sort=popular|latest
+│   │   │   ├── comment.controller.js
+│   │   │   ├── like.controller.js
+│   │   │   ├── user.controller.js
+│   │   │   ├── admin.controller.js
+│   │   │   └── stats.controller.js    # NEW: public counts for hero stats bar
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── index.js
+│   │   │   ├── auth.routes.js
+│   │   │   ├── note.routes.js
+│   │   │   ├── comment.routes.js
+│   │   │   ├── user.routes.js
+│   │   │   ├── admin.routes.js
+│   │   │   └── stats.routes.js        # NEW: GET /stats (no auth)
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── auth.js
+│   │   │   ├── isAdmin.js
+│   │   │   ├── upload.js
+│   │   │   ├── validate.js
+│   │   │   ├── logger.js
+│   │   │   ├── notFound.js
+│   │   │   └── errorHandler.js
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── generateTokens.js
+│   │   │   ├── generateThumbnail.js   # NEW: first PDF page → image for cards
+│   │   │   ├── ApiError.js
+│   │   │   └── asyncHandler.js
+│   │   │
+│   │   ├── validators/
+│   │   │   ├── auth.validator.js
+│   │   │   └── note.validator.js
+│   │   │
+│   │   ├── app.js
+│   │   └── server.js
+│   │
+│   ├── uploads/
+│   │   ├── pdfs/                      # CHANGED: split PDFs and thumbnails
+│   │   ├── thumbnails/
+│   │   └── .gitkeep
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   └── package.json
+│
+├── frontend/
+│   ├── public/
+│   │   ├── favicon.svg
+│   │   └── og-image.png
+│   │
+│   ├── src/
+│   │   ├── api/
+│   │   │   ├── axios.js
+│   │   │   ├── auth.api.js
+│   │   │   ├── notes.api.js
+│   │   │   ├── admin.api.js
+│   │   │   └── stats.api.js           # NEW
+│   │   │
+│   │   ├── assets/                    # NEW
+│   │   │   ├── fonts/                 # Poppins
+│   │   │   ├── images/
+│   │   │   │   ├── hero-banner.jpg    # textured gradient banner
+│   │   │   │   ├── cta-bg.jpg         # background of the final CTA
+│   │   │   │   └── feature-*.jpg      # images for stacked cards
+│   │   │   └── icons/
+│   │   │
+│   │   ├── context/
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── ThemeContext.jsx       # NEW (optional light/dark)
+│   │   │
+│   │   ├── data/                      # NEW: static content, keeps JSX clean
+│   │   │   ├── navLinks.js            # navbar dropdown items
+│   │   │   ├── features.js            # stacked cards content
+│   │   │   ├── steps.js               # "How it works" step cards
+│   │   │   ├── testimonials.js
+│   │   │   ├── faqs.js
+│   │   │   └── footerLinks.js         # 5 footer columns
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useAuth.js
+│   │   │   ├── useDebounce.js
+│   │   │   ├── useScrollProgress.js   # NEW: drives stacked cards + horizontal scroll
+│   │   │   ├── useInView.js           # NEW: reveal-on-scroll
+│   │   │   └── useCountUp.js          # NEW: animated stats numbers
+│   │   │
+│   │   ├── components/
+│   │   │   ├── layout/
+│   │   │   │   ├── Navbar.jsx         # sticky, dropdown menus, Get Started button
+│   │   │   │   ├── NavDropdown.jsx    # NEW
+│   │   │   │   ├── MobileMenu.jsx     # NEW
+│   │   │   │   ├── Footer.jsx         # 5 columns
+│   │   │   │   ├── FooterWatermark.jsx# NEW: giant faded "StudyShare" text
+│   │   │   │   ├── FloatingActions.jsx# NEW: right-edge Top + mobile buttons
+│   │   │   │   └── Layout.jsx
+│   │   │   │
+│   │   │   ├── home/                  # NEW: one file per section of the video
+│   │   │   │   ├── Hero.jsx           # banner + headline + search box
+│   │   │   │   ├── HeroSearch.jsx     # big input + "Search Notes" button
+│   │   │   │   ├── StatsBar.jsx       # notes / downloads / students / subjects
+│   │   │   │   ├── FeatureStack.jsx   # tilted cards stacking on scroll
+│   │   │   │   ├── FeatureCard.jsx
+│   │   │   │   ├── HowItWorks.jsx     # giant bg text + horizontal scroll
+│   │   │   │   ├── StepCard.jsx
+│   │   │   │   ├── Testimonials.jsx   # "Trusted by students"
+│   │   │   │   ├── TestimonialCard.jsx
+│   │   │   │   ├── FAQ.jsx            # accordion
+│   │   │   │   └── CTABanner.jsx      # final "Ready to share notes?"
+│   │   │   │
+│   │   │   ├── notes/
+│   │   │   │   ├── NoteCard.jsx       # white rounded card with thumbnail
+│   │   │   │   ├── NoteList.jsx
+│   │   │   │   ├── NoteFilters.jsx
+│   │   │   │   ├── UploadForm.jsx
+│   │   │   │   ├── CommentSection.jsx
+│   │   │   │   └── LikeButton.jsx
+│   │   │   │
+│   │   │   ├── ui/                    # NEW: reusable design-system pieces
+│   │   │   │   ├── Button.jsx         # peach primary / white secondary
+│   │   │   │   ├── Card.jsx
+│   │   │   │   ├── Accordion.jsx
+│   │   │   │   ├── Badge.jsx          # pending / approved / rejected
+│   │   │   │   ├── Input.jsx
+│   │   │   │   └── SectionHeading.jsx # small accent label + big title
+│   │   │   │
+│   │   │   ├── common/
+│   │   │   │   ├── Pagination.jsx
+│   │   │   │   ├── Loader.jsx
+│   │   │   │   ├── Modal.jsx
+│   │   │   │   └── Toast.jsx          # NEW
+│   │   │   │
+│   │   │   └── routes/
+│   │   │       ├── ProtectedRoute.jsx
+│   │   │       └── AdminRoute.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.jsx               # composes components/home/*
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── Notes.jsx
+│   │   │   ├── NoteDetail.jsx
+│   │   │   ├── Upload.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── AdminPanel.jsx
+│   │   │   ├── Contact.jsx            # NEW (footer link)
+│   │   │   ├── Terms.jsx              # NEW (footer link)
+│   │   │   ├── Privacy.jsx            # NEW (footer link)
+│   │   │   └── NotFound.jsx
+│   │   │
+│   │   ├── styles/                    # NEW
+│   │   │   ├── fonts.css              # Poppins @font-face
+│   │   │   └── animations.css         # marquee, fade-up, tilt keyframes
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── constants.js
+│   │   │   └── formatters.js          # NEW: 10000 → "10K+", dates
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css                  # Tailwind directives + CSS variables
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── index.html
+│   ├── package.json
+│   ├── postcss.config.js              # NEW
+│   ├── tailwind.config.js             # NEW: dark bg, peach accent, Poppins
+│   └── vite.config.js
+│
+├── .gitignore
+└── README.md
