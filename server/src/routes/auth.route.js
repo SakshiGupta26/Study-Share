@@ -9,7 +9,7 @@ import {
 
 import {
   registerValidator,
-  loginValidator,
+ loginValidator,
 } from "../validators/auth.validators.js";
 
 import validate from "../middleware/validate.js";
