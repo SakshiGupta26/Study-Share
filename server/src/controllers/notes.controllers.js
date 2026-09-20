@@ -133,18 +133,25 @@ export const getNoteById = asyncHandle( async (req,res) => {
     }
 
     if(note.status !== "approved"){
-        const isOwner = req.user && note.uploadBy._id.toString() === req.user._id.toString();
+        const isOwner = req.user && note.uploadedBy._id.toString() === req.user._id.toString();
         const isAdmin = req.user && req.user.role === "admin";
 
         if(!isOwner && !isAdmin){
             throw new apiError(403, "You are not allowed to view this note");
         }
+        const likeCount = note.likes.length;
+
+        const likedByUser = req.user ? note.likes.some(
+            (like) => like.toString() === req.user._id.toString()
+        ) :false;
     }
     return res.status(200).json({
         success : true,
         message : "Note fetched successfully",
         data : {
              note,
+             likeCount,
+             likedByUser
         }
     })
 })
