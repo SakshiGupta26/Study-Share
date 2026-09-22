@@ -1,14 +1,18 @@
 import express from "express";
-import auth from "../middleware/auth";
-import isAdmin from "../middleware/isAdmin";
-import { approvedNote, rejectNote } from "../controllers/admin.controller";
+
+import auth from "../middleware/auth.js";
+import isAdmin from "../middleware/isAdmin.js";
+import {
+  approveNote,
+  rejectNote,
+} from "../controllers/admin.controller.js";
 
 const router = express.Router();
 
 router.use(auth);
 router.use(isAdmin);
 
-router.patch("/notes/:id/approve",approvedNote);
-router.patch("/notes/:id/reject",rejectNote);
+router.patch("/notes/:id/approve", approveNote);
+router.patch("/notes/:id/reject", rejectNote);
 
 export default router;

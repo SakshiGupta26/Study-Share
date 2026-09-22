@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
 
   theme: {
     extend: {
@@ -9,8 +12,10 @@ export default {
       },
 
       colors: {
-        dark: "#1E1E1E",
-        peach: "#FFB07C",
+        background: "#111111",
+        card: "#FFFFFF",
+        peach: "#FFB088",
+        text: "#6B7280",
       },
     },
   },
